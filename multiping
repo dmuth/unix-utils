@@ -1,4 +1,9 @@
 #!/bin/bash
+#
+# Ping multiple hosts
+#
+# Syntax is: ./multiping host [ host [ host [ host ]]]
+#
 
 #
 # Errors are fatal
