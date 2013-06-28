@@ -11,14 +11,44 @@
 set -e
 
 function print_syntax() {
-	echo "Syntax: $0 [--loop] [-6] --num num hostname"
+	echo "Syntax: $0 [--loop] [-6] [--log] --num num hostname"
 	exit 1
 }
+
+#
+# Wrapper to run mtr, with possible logging
+#
+# {param} string $1 Our command to run
+# {param} string $2 The file to log to, if specified
+#
+function run_mtr() {
+	local CMD=$1
+	local LOG=$2
+
+	if test $LOG
+	then
+		echo "" | tee -a ${LOG}
+		date | tee -a ${LOG}
+		echo "Running '${CMD}'..." | tee -a ${LOG}
+		echo "Logging output to '${LOG}'..."
+		$CMD | tee -a ${LOG}
+
+	else
+		echo ""
+		date
+		echo "Running '${CMD}'..."
+		$CMD
+
+	fi
+
+} # End of run_mtr()
+
 
 LOOP=""
 IPV6=""
 NUM=""
 HOST=""
+LOG=""
 
 
 #
@@ -47,6 +77,10 @@ do
 		NUM=$ARG_NEXT
 		shift
 
+	elif test $ARG == "--log"
+	then
+		LOG="mtr-report-log.txt"
+
 	elif test $ARG == "-h"
 	then
 		print_syntax
@@ -70,7 +104,7 @@ then
 
 fi
 
-#echo "${LOOP}, ${IPV6}, ${NUM}, ${HOST}" # Debugging
+#echo "LOOP=${LOOP}, IPV6=${IPV6}, NUM=${NUM}, LOG=${LOG}, HOST=${HOST}" # Debugging
 
 #
 # Create our command
@@ -84,18 +118,17 @@ else
 fi
 
 CMD="${CMD} --report --report-cycles ${NUM} ${HOST}"
+
 #echo "CMD: $CMD" # Debugging
 
 if test ! $LOOP
 then
-	$CMD
+	run_mtr "$CMD" $LOG
 
 else 
 	while true
 	do
-		date
-		$CMD
-		date
+		run_mtr "$CMD" $LOG
 	done
 
 fi
