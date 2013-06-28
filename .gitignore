@@ -4,3 +4,8 @@
 #
 *.swp
 
+#
+# Our mtr log.
+#
+mtr-report-log.txt
+
