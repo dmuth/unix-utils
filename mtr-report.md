@@ -26,11 +26,11 @@ This is useful when my Comcast connection starts acting up. :-)
 ## Syntax
 
     mtr-report [--loop] [-6] [--log] --num num hostname
-    --loop Run in a loop
-    -6 Use IPv6. IPv4 is the default.
-    --log Log the results to mtr-report-log.txt
-    --num How many pings to send out
-    hostname Whom do you want to ping today?
+          --loop Run in a loop
+              -6 Use IPv6. IPv4 is the default.
+           --log Log the results to mtr-report-log.txt
+           --num How many pings to send out
+        hostname Whom do you want to ping today?
 
 
 ## Author
