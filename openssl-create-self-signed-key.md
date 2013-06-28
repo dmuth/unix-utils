@@ -75,6 +75,7 @@ for the `openssl` **every single time**, hence this script.
 
 ## Author
 
-Douglas T. Muth.  You can email me at doug.muth@gmail.com or (harass me in social media)[http://www.dmuth.org/contact].
+Douglas T. Muth.  You can email me at doug.muth@gmail.com or 
+[harass me in social media](http://www.dmuth.org/contact).
 
 
