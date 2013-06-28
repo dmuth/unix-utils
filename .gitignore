@@ -9,3 +9,9 @@
 #
 mtr-report-log.txt
 
+#
+# Output from openssl-create-self-signed-key
+#
+*.crt
+*.key
+
