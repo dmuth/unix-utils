@@ -1,7 +1,6 @@
-
 ## MTR Report
 
-This script is a wrapper that I wrote for the (mtr ping tool)[http://en.wikipedia.org/wiki/MTR_(software)].
+This script is a wrapper that I wrote for the [mtr ping tool](http://en.wikipedia.org/wiki/MTR_(software\)).
 
 It makes my life just a little easier by acting as a wrapper for MTR so I can easily 
 get the status of a route in a long running loop, and logged to a file.
@@ -27,15 +26,16 @@ This is useful when my Comcast connection starts acting up. :-)
 ## Syntax
 
     mtr-report [--loop] [-6] [--log] --num num hostname
-    --loop Run in a loop
-    -6 Use IPv6. IPv4 is the default.
-    --log Log the results to mtr-report-log.txt
-    --num How many pings to send out
-    hostname Whom do you want to ping today?
+          --loop Run in a loop
+              -6 Use IPv6. IPv4 is the default.
+           --log Log the results to mtr-report-log.txt
+           --num How many pings to send out
+        hostname Whom do you want to ping today?
 
 
 ## Author
 
-Douglas T. Muth.  You can email me at doug.muth@gmail.com or (harass me in social media)[http://www.dmuth.org/contact].
+Douglas T. Muth.  You can email me at doug.muth@gmail.com or 
+[harass me in social media](http://www.dmuth.org/contact).
 
 
