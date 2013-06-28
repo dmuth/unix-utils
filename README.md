@@ -16,7 +16,8 @@ Douglas T. Muth.  You can email me at doug.muth@gmail.com or
 
 ## Shameless self-promotion
 
-I'm always looking for interesting things to work on.
+I like solving problems like these. If you need someone to 
+solve problems like these, we should talk. :-)
 Here's my resume:
 [http://www.dmuth.org/resume](http://www.dmuth.org/resume)
 
