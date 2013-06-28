@@ -1,0 +1,103 @@
+#!/bin/bash
+#
+# This script acts as a wrapper for MTR, using it in report mode forever.
+#
+# Useful for doing things like watching my Comcast connection at home. :-)
+#
+
+#
+# Errors are fatal
+#
+set -e
+
+function print_syntax() {
+	echo "Syntax: $0 [--loop] [-6] --num num hostname"
+	exit 1
+}
+
+LOOP=""
+IPV6=""
+NUM=""
+HOST=""
+
+
+#
+# Loop through our arguments and parse them
+#
+while true
+do
+
+	ARG=$1
+	ARG_NEXT=$2
+
+	if test ! "$ARG"
+	then
+		break
+
+	elif test $ARG == "--loop"
+	then
+		LOOP=1
+
+	elif test $ARG == "-6"
+	then
+		IPV6=1
+
+	elif test $ARG == "--num"
+	then
+		NUM=$ARG_NEXT
+		shift
+
+	elif test $ARG == "-h"
+	then
+		print_syntax
+
+	else
+		HOST=$ARG
+
+	fi
+
+	shift
+
+done
+
+if test ! $HOST
+then
+	print_syntax
+
+elif test ! $NUM
+then
+	print_syntax
+
+fi
+
+#echo "${LOOP}, ${IPV6}, ${NUM}, ${HOST}" # Debugging
+
+#
+# Create our command
+#
+CMD="mtr "
+if test $IPV6
+then
+	CMD="${CMD} -6 "
+else
+	CMD="${CMD} -4 "
+fi
+
+CMD="${CMD} --report --report-cycles ${NUM} ${HOST}"
+#echo "CMD: $CMD" # Debugging
+
+if test ! $LOOP
+then
+	$CMD
+
+else 
+	while true
+	do
+		date
+		$CMD
+		date
+	done
+
+fi
+
+
