@@ -38,4 +38,12 @@ This is useful when my Comcast connection starts acting up. :-)
 Douglas T. Muth.  You can email me at doug.muth@gmail.com or 
 [harass me in social media](http://www.dmuth.org/contact).
 
+## Shameless self-promotion
+
+I like solving problems like these. If you need someone to 
+solve problems like these, we should talk. :-)
+Here's my resume:
+[http://www.dmuth.org/resume](http://www.dmuth.org/resume)
+
+
 

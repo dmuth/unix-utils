@@ -72,8 +72,18 @@ would be safer to write a wrapper for ping instead.
     comcast.com: round-trip min/avg/max/stddev = 60.557/62.419/64.255/1.310 ms
 
 
-### Contact me
+## Author
 
-http://www.dmuth.org/contact
+Douglas T. Muth.  You can email me at doug.muth@gmail.com or 
+[harass me in social media](http://www.dmuth.org/contact).
+
+
+## Shameless self-promotion
+
+I like solving problems like these. If you need someone to 
+solve problems like these, we should talk. :-)
+Here's my resume:
+[http://www.dmuth.org/resume](http://www.dmuth.org/resume)
+
 
 
