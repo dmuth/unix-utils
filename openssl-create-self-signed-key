@@ -31,6 +31,7 @@ CSR="${BASENAME}.csr"
 #
 CERTIFICATE="${BASENAME}.crt"
 
+KEYSIZE=2048
 
 #
 # Don't worry about the password here.  The assumption 
@@ -41,7 +42,7 @@ echo "#"
 echo "# About to generate private key"
 echo "#"
 echo "#"
-openssl genrsa -des3 -passout pass:12345 -out ${KEY} 2048
+openssl genrsa -des3 -passout pass:12345 -out ${KEY} ${KEYSIZE}
 
 
 echo "#"
@@ -67,16 +68,12 @@ echo "#"
 echo "#"
 openssl x509 -req -days 365 -in ${CSR} -signkey ${KEY} -out ${CERTIFICATE}
 
-#
-# We don't need our signing request anymore.
-#
-rm -f ${CSR}
-
 echo "#"
 echo "#"
 echo "# All done!  Here are your files:"
 echo "# Private key: ${KEY}"
 echo "# Certificate: ${CERTIFICATE}"
+echo "# Certtificate signing request: ${CSR} (In case you want this signed later)"
 echo "#"
 echo "#"
 
