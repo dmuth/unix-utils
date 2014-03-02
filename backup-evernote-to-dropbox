@@ -1,0 +1,40 @@
+#!/bin/bash
+#
+# This script checks our Evernotes into git and then pushes it
+# into the Dropbox directory
+#
+
+#
+# Evernote directory. Season to taste.
+#
+DIR="$HOME/Library/Containers/com.evernote.Evernote/Data/Library/Application Support/Evernote/accounts/Evernote"
+
+
+#
+# Errors are fatal
+#
+set -e 
+
+#
+# Check to see if Evernote is running
+#
+#set +e
+PIDS=`ps ax |grep -i evernote |grep -v grep |grep -v backup-evernote` || true
+#echo $PIDS # Debugging
+#set -e
+
+if test "$PIDS"
+then
+	echo "Evernote is still running!  Please exit Evernote before trying to back up."
+	exit 1
+fi
+
+
+cd "$DIR"
+git add .
+git status
+COMMENT="Backup on `date`"
+git commit -m "$COMMENT" . || true
+git push -u origin master
+
+
