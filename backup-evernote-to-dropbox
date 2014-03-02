@@ -18,10 +18,8 @@ set -e
 #
 # Check to see if Evernote is running
 #
-#set +e
 PIDS=`ps ax |grep -i evernote |grep -v grep |grep -v backup-evernote` || true
 #echo $PIDS # Debugging
-#set -e
 
 if test "$PIDS"
 then
