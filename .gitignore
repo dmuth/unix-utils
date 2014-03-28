@@ -5,9 +5,10 @@
 *.swp
 
 #
-# Our mtr log.
+# Our logs
 #
 mtr-report-log.txt
+fping-report-log.txt
 
 #
 # Output from openssl-create-self-signed-key

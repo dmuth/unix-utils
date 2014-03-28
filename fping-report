@@ -1,0 +1,124 @@
+#!/bin/bash
+#
+# This script acts as a wrapper for fping, using it in report mode forever.
+#
+
+#
+# Errors are fatal
+#
+set -e
+
+function print_syntax() {
+	echo "Syntax: $0 [--loop] [--log] --num num hostname(s)"
+	exit 1
+}
+
+#
+# Wrapper to run fping, with possible logging
+#
+# {param} string $1 Our command to run
+# {param} string $2 The file to log to, if specified
+#
+function run_fping() {
+
+	local CMD=$1
+	local LOG=$2
+
+	if test $LOG
+	then
+		echo "" | tee -a ${LOG}
+		date | tee -a ${LOG}
+		echo "Running '${CMD}'..." | tee -a ${LOG}
+		echo "Logging output to '${LOG}'..."
+		$CMD 2>&1 | tee -a ${LOG}
+
+	else
+		echo ""
+		date
+		echo "Running '${CMD}'..."
+		$CMD
+
+	fi
+
+} # End of run_fping()
+
+
+LOOP=""
+NUM=""
+HOST=""
+LOG=""
+
+
+#
+# Loop through our arguments and parse them
+#
+while true
+do
+
+	ARG=$1
+	ARG_NEXT=$2
+
+	if test ! "$ARG"
+	then
+		break
+
+	elif test $ARG == "--loop"
+	then
+		LOOP=1
+
+	elif test $ARG == "--num"
+	then
+		NUM=$ARG_NEXT
+		shift
+
+	elif test $ARG == "--log"
+	then
+		LOG="fping-report-log.txt"
+
+	elif test $ARG == "-h"
+	then
+		print_syntax
+
+	else
+		HOST="${HOST} $ARG"
+
+	fi
+
+	shift
+
+done
+
+if test ! "$HOST"
+then
+	print_syntax
+
+elif test ! $NUM
+then
+	print_syntax
+
+fi
+
+#echo "LOOP=${LOOP}, IPV6=${IPV6}, NUM=${NUM}, LOG=${LOG}, HOST=${HOST}" # Debugging
+
+#
+# Create our command
+#
+CMD="fping "
+
+CMD="${CMD} -c ${NUM} -q ${HOST}"
+
+#echo "CMD: $CMD" # Debugging
+
+if test ! $LOOP
+then
+	run_fping "$CMD" $LOG
+
+else 
+	while true
+	do
+		run_fping "$CMD" $LOG
+		#sleep 1
+	done
+
+fi
+
