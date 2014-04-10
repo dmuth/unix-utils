@@ -1,0 +1,21 @@
+#!/bin/sh
+#
+# This is a wrapper script for making self-signed certificates
+#
+
+#
+# Make errors be fatal.
+#
+set -e
+
+if test ! "$1"
+then
+	echo "Syntax: $0 basename"
+	exit 1
+fi
+
+FILE=$1
+
+openssl req -text -noout -verify -in ${FILE}
+
+
